@@ -59,7 +59,6 @@ class Taskmanager extends Component {
       end: offsetTop + offsetHeight,
       ref
     };
-    console.log(this.itemPositionMap);
   };
 
   handleItemUpdate = positionInfo => {
@@ -75,36 +74,6 @@ class Taskmanager extends Component {
     }
   };
   handleItemMoveEnd = positionInfo => {
-    console.log(positionInfo.translateY);
-    for (let i in this.gridPositionMap) {
-      this.gridPositionMap[i].ref.toggleDropReady(false);
-      if (
-        positionInfo.x > this.gridPositionMap[i].start &&
-        positionInfo.x < this.gridPositionMap[i].end &&
-        i !== positionInfo.parentIndex.toString()
-      ) {
-        let tempData = deepcopy(this.state.data);
-        let tempItem = tempData[positionInfo.parentIndex].data.splice(
-          positionInfo.index,
-          1
-        )[0];
-        // console.log(tempItem)
-        tempData[i].data.push(tempItem);
-        this.setState(
-          {
-            data: tempData
-          },
-          () => {
-            //save data to database
-            try {
-              this.props.onUpdate(this.state.data);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-        );
-      }
-    }
     let itemGroup = this.itemPositionMap[positionInfo.parentIndex];
     for (let i in itemGroup) {
       if (
@@ -119,19 +88,9 @@ class Taskmanager extends Component {
           1
         )[0];
         tempData[positionInfo.parentIndex].data.splice(i, 0, tempItem);
-        this.setState(
-          {
-            data: tempData
-          },
-          () => {
-            //save data to database
-            try {
-              this.props.onUpdate(this.state.data);
-            } catch (error) {
-              console.error(error);
-            }
-          }
-        );
+        this.setState({
+          data: tempData
+        });
       } else if (
         i !== positionInfo.index.toString() &&
         positionInfo.translateY < 0 &&
@@ -144,18 +103,37 @@ class Taskmanager extends Component {
           1
         )[0];
         tempData[positionInfo.parentIndex].data.splice(i, 0, tempItem);
+        console.log('22222', tempData);
+        this.setState({
+          data: tempData
+        });
+      }
+    }
+    //save data to database
+    try {
+      this.props.onUpdate(this.state.data);
+    } catch (error) {
+      console.error(error);
+    }
+
+    for (let i in this.gridPositionMap) {
+      this.gridPositionMap[i].ref.toggleDropReady(false);
+      if (
+        positionInfo.x > this.gridPositionMap[i].start &&
+        positionInfo.x < this.gridPositionMap[i].end &&
+        i !== positionInfo.parentIndex.toString()
+      ) {
+        let tempData = deepcopy(this.state.data);
+        let tempItem = tempData[positionInfo.parentIndex].data.splice(
+          positionInfo.index,
+          1
+        )[0];
+        tempData[i].data.push(tempItem);
         this.setState(
           {
             data: tempData
           },
-          () => {
-            //save data to database
-            try {
-              this.props.onUpdate(this.state.data);
-            } catch (error) {
-              console.error(error);
-            }
-          }
+          () => {}
         );
       }
     }
@@ -194,30 +172,34 @@ class Taskmanager extends Component {
                     <div className="title">{grid.title}</div>
                     {grid.data.length > 0
                       ? grid.data.map((item, index) => {
-                          return (
-                            <Itemcomponent
-                              index={index}
-                              parentIndex={gridIndex}
-                              key={(() => {
-                                return this.generateKey('item', this.itemKeys);
-                              })()}
-                              init={(positionInfo, ref) => {
-                                this.handleItemInit(positionInfo, ref);
-                              }}
-                              update={positionInfo => {
-                                this.handleItemUpdate(positionInfo);
-                              }}
-                              itemMoveEnd={positionInfo => {
-                                return new Promise((resolve, reject) => {
+                          try {
+                            return (
+                              <Itemcomponent
+                                index={index}
+                                parentIndex={gridIndex}
+                                key={(() => {
+                                  return this.generateKey(
+                                    'item',
+                                    this.itemKeys
+                                  );
+                                })()}
+                                init={(positionInfo, ref) => {
+                                  this.handleItemInit(positionInfo, ref);
+                                }}
+                                update={positionInfo => {
+                                  this.handleItemUpdate(positionInfo);
+                                }}
+                                itemMoveEnd={positionInfo => {
                                   this.handleItemMoveEnd(positionInfo);
-                                  resolve();
-                                });
-                              }}
-                              itemStyle={this.props.itemStyle}
-                            >
-                              {this.renderItemTemplate(item)}
-                            </Itemcomponent>
-                          );
+                                }}
+                                itemStyle={this.props.itemStyle}
+                              >
+                                {this.renderItemTemplate(item)}
+                              </Itemcomponent>
+                            );
+                          } catch (error) {
+                            console.error(error);
+                          }
                         })
                       : null}
                   </Gridcomponent>
