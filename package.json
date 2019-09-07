@@ -1,6 +1,6 @@
 {
   "name": "react-drag-taskmanager",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "A drag & drop taskmanager component for React.js",
   "main": "lib/index.js",
   "scripts": {
