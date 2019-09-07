@@ -1,5 +1,9 @@
 # react-drag-taskmanager
 
+## description
+
+A drag & drop taskmanager component for React.js inspired by Jira kanban
+
 ## demo
 
 [link to demo](https://michaelzhou1987.github.io/react-drag-taskmanager/)
