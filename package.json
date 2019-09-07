@@ -1,0 +1,50 @@
+{
+  "name": "react-drag-taskmanager",
+  "version": "0.0.1",
+  "description": "A drag & drop taskmanager component for React.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open development",
+    "build": "webpack --mode production",
+    "compile": "npx babel src --out-dir lib",
+    "deploy": "gh-pages -d example/dist",
+    "publish-demo": "npm run build && npm run deploy"
+  },
+  "keywords": [
+    "taskmanager",
+    "react-taskmanager",
+    "drag taskmanager"
+  ],
+  "author": "michaelyizhuozhou",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelzhou1987/react-drag-taskmanager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michaelzhou1987/react-drag-taskmanager/issues"
+  },
+  "homepage": "https://github.com/michaelzhou1987/react-drag-taskmanager#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "gh-pages": "^2.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jsx-loader": "^0.13.2",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}

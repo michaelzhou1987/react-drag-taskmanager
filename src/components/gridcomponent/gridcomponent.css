@@ -1,0 +1,15 @@
+.grid-component {
+  display: table-cell;
+  background: #f4f5f7;
+  padding: 10px 20px;
+  border-spacing: 10px 0;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+}
+.grid-component.drop-ready-state {
+  border: 1px dashed #000;
+  opacity: 0.2;
+}

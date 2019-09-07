@@ -1,0 +1,14 @@
+.dragable-component {
+  padding: 5px;
+  width: 100%;
+}
+.dragable-component .item-component {
+  background: #deebff;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25);
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 20px;
+}
