@@ -80,7 +80,9 @@ class Taskmanager extends Component {
         i !== positionInfo.index.toString() &&
         positionInfo.translateY > 0 &&
         positionInfo.y > itemGroup[i].start &&
-        positionInfo.y < itemGroup[i].end
+        positionInfo.y < itemGroup[i].end &&
+        positionInfo.x > this.gridPositionMap[positionInfo.parentIndex].start &&
+        positionInfo.x < this.gridPositionMap[positionInfo.parentIndex].end
       ) {
         let tempData = deepcopy(this.state.data);
         let tempItem = tempData[positionInfo.parentIndex].data.splice(
@@ -95,7 +97,9 @@ class Taskmanager extends Component {
         i !== positionInfo.index.toString() &&
         positionInfo.translateY < 0 &&
         positionInfo.bottomY > itemGroup[i].start &&
-        positionInfo.bottomY < itemGroup[i].end
+        positionInfo.bottomY < itemGroup[i].end &&
+        positionInfo.x > this.gridPositionMap[positionInfo.parentIndex].start &&
+        positionInfo.x < this.gridPositionMap[positionInfo.parentIndex].end
       ) {
         let tempData = deepcopy(this.state.data);
         let tempItem = tempData[positionInfo.parentIndex].data.splice(
@@ -103,7 +107,6 @@ class Taskmanager extends Component {
           1
         )[0];
         tempData[positionInfo.parentIndex].data.splice(i, 0, tempItem);
-        console.log('22222', tempData);
         this.setState({
           data: tempData
         });

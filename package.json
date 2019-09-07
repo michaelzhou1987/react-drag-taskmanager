@@ -1,13 +1,13 @@
 {
   "name": "react-drag-taskmanager",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A drag & drop taskmanager component for React.js",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open development",
     "build": "webpack --mode production",
-    "compile": "npx babel src --out-dir lib --source-maps inline --copy-files",
+    " ": "npx babel src --out-dir lib --source-maps inline --copy-files",
     "deploy": "gh-pages -d example/dist",
     "publish-demo": "npm run build && npm run deploy"
   },
